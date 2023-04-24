@@ -1,6 +1,9 @@
 package com.nogayhusrev.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 @Getter
@@ -14,14 +17,14 @@ public class ResponseWrapper {
     private Integer code;
     private Object data;
 
-    public ResponseWrapper(String message, Object data,HttpStatus httpStatus) {
+    public ResponseWrapper(String message, Object data, HttpStatus httpStatus) {
         this.success = true;
         this.message = message;
         this.code = httpStatus.value();
         this.data = data;
     }
 
-    public ResponseWrapper(String message,HttpStatus httpStatus) {
+    public ResponseWrapper(String message, HttpStatus httpStatus) {
         this.message = message;
         this.code = httpStatus.value();
         this.success = true;

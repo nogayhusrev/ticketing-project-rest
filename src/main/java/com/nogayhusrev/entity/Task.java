@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @Where(clause = "is_deleted=false")
-public class Task extends BaseEntity{
+public class Task extends BaseEntity {
 
     private String taskSubject;
     private String taskDetail;

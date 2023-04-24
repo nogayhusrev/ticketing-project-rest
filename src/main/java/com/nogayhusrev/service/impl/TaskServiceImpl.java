@@ -41,7 +41,7 @@ public class TaskServiceImpl implements TaskService {
 
         Optional<Task> task = taskRepository.findById(id);
 
-        if(task.isPresent()){
+        if (task.isPresent()) {
             return taskMapper.convertToDto(task.get());
         }
         return null;
@@ -66,9 +66,9 @@ public class TaskServiceImpl implements TaskService {
     public void update(TaskDTO dto) {
 
         Optional<Task> task = taskRepository.findById(dto.getId());
-        Task convertedTask  = taskMapper.convertToEntity(dto);
+        Task convertedTask = taskMapper.convertToEntity(dto);
 
-        if(task.isPresent()){
+        if (task.isPresent()) {
             convertedTask.setTaskStatus(dto.getTaskStatus() == null ? task.get().getTaskStatus() : dto.getTaskStatus());
             convertedTask.setAssignedDate(task.get().getAssignedDate());
             taskRepository.save(convertedTask);
@@ -81,7 +81,7 @@ public class TaskServiceImpl implements TaskService {
 
         Optional<Task> foundTask = taskRepository.findById(id);
 
-        if(foundTask.isPresent()){
+        if (foundTask.isPresent()) {
             foundTask.get().setIsDeleted(true);
             taskRepository.save(foundTask.get());
         }

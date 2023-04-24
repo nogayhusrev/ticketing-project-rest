@@ -1,4 +1,5 @@
 package com.nogayhusrev.dto;
+
 import com.nogayhusrev.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
