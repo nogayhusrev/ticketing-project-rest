@@ -1,5 +1,6 @@
 package com.nogayhusrev.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.nogayhusrev.enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,7 +40,9 @@ public class ProjectDTO {
 
     private Status projectStatus;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int completeTaskCounts;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private int unfinishedTaskCounts;
 
     public ProjectDTO(String projectName, String projectCode, UserDTO assignedManager, LocalDate startDate, LocalDate endDate, String projectDetail, Status projectStatus) {
