@@ -6,6 +6,7 @@ import com.nogayhusrev.dto.UserDTO;
 import com.nogayhusrev.entity.User;
 import com.nogayhusrev.mapper.UserMapper;
 import com.nogayhusrev.repository.UserRepository;
+import com.nogayhusrev.service.KeycloakService;
 import com.nogayhusrev.service.ProjectService;
 import com.nogayhusrev.service.TaskService;
 import com.nogayhusrev.service.UserService;
@@ -22,12 +23,15 @@ public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final ProjectService projectService;
     private final TaskService taskService;
+    private final KeycloakService keycloakService;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, @Lazy ProjectService projectService, @Lazy TaskService taskService) {
+
+    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper, @Lazy ProjectService projectService, @Lazy TaskService taskService, KeycloakService keycloakService) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.projectService = projectService;
         this.taskService = taskService;
+        this.keycloakService = keycloakService;
     }
 
     @Override
@@ -50,6 +54,10 @@ public class UserServiceImpl implements UserService {
         User obj = userMapper.convertToEntity(user);
 
         userRepository.save(obj);
+
+        keycloakService.userCreate(user);
+
+
 
     }
 
