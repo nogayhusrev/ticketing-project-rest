@@ -3,6 +3,7 @@ package com.nogayhusrev.controller;
 
 import com.nogayhusrev.dto.ResponseWrapper;
 import com.nogayhusrev.dto.UserDTO;
+import com.nogayhusrev.exception.TicketingProjectException;
 import com.nogayhusrev.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -61,7 +62,7 @@ public class UserController {
     @DeleteMapping("/{username}")
     @RolesAllowed("Admin")
     @Operation(summary = "Delete user")
-    public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("username") String userName) {
+    public ResponseEntity<ResponseWrapper> deleteUser(@PathVariable("username") String userName) throws TicketingProjectException {
         userService.delete(userName);
         return ResponseEntity.ok(new ResponseWrapper("User is successfully deleted", HttpStatus.OK));
 

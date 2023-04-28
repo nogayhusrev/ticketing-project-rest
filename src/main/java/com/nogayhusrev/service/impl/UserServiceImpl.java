@@ -1,9 +1,11 @@
 package com.nogayhusrev.service.impl;
 
+import com.nogayhusrev.annotation.DefaultExceptionMessage;
 import com.nogayhusrev.dto.ProjectDTO;
 import com.nogayhusrev.dto.TaskDTO;
 import com.nogayhusrev.dto.UserDTO;
 import com.nogayhusrev.entity.User;
+import com.nogayhusrev.exception.TicketingProjectException;
 import com.nogayhusrev.mapper.UserMapper;
 import com.nogayhusrev.repository.UserRepository;
 import com.nogayhusrev.service.KeycloakService;
@@ -84,7 +86,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void delete(String username) {
+    @DefaultExceptionMessage(defaultMessage = "Failed to delete user")
+    public void delete(String username) throws TicketingProjectException {
 
         User user = userRepository.findByUserNameAndIsDeleted(username, false);
 
@@ -92,6 +95,8 @@ public class UserServiceImpl implements UserService {
             user.setIsDeleted(true);
             user.setUserName(user.getUserName() + "-" + user.getId());  // harold@manager.com-2
             userRepository.save(user);
+        }else {
+            throw new TicketingProjectException("User can not be deleted");
         }
 
     }
