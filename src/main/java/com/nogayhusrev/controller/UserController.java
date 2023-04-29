@@ -1,6 +1,7 @@
 package com.nogayhusrev.controller;
 
 
+import com.nogayhusrev.annotation.ExecutionTime;
 import com.nogayhusrev.dto.ResponseWrapper;
 import com.nogayhusrev.dto.UserDTO;
 import com.nogayhusrev.exception.TicketingProjectException;
@@ -26,6 +27,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @ExecutionTime
     @GetMapping
     @RolesAllowed({"Manager", "Admin"})
     @Operation(summary = "Get users")
@@ -34,6 +36,7 @@ public class UserController {
         return ResponseEntity.ok(new ResponseWrapper("Users are successfully retrieves", userDTOList, HttpStatus.OK));
     }
 
+    @ExecutionTime
     @GetMapping("/{username}")
     @RolesAllowed("Admin")
     @Operation(summary = "Get user by username")
